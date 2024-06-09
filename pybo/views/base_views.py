@@ -23,7 +23,7 @@ def index(request):
             Q(author__username__icontains=kw) |  # 질문 글쓴이
             Q(answer__author__username__icontains=kw)  # 답변 글쓴이
         ).distinct()
-    paginator = Paginator(question_list, 5)  # 페이지당 5개씩 보여주기
+    paginator = Paginator(question_list, 10)  # 페이지당 5개씩 보여주기
     page_obj = paginator.get_page(page)
     context = {'question_list': page_obj, 'page': page, 'kw': kw, 'categories': categories}
     return render(request, 'pybo/question_list.html', context)
@@ -61,7 +61,7 @@ def category_detail(request, category_id):
             Q(author__username__icontains=kw) |  # 질문 글쓴이
             Q(answer__author__username__icontains=kw)  # 답변 글쓴이
         ).distinct()
-    paginator = Paginator(question_list, 5)  # 페이지당 5개씩 보여주기
+    paginator = Paginator(question_list, 10)  # 페이지당 5개씩 보여주기
     page_obj = paginator.get_page(page)
     context = {'question_list': page_obj, 'page': page, 'kw': kw, 'categories': categories, 'category': category}
     return render(request, 'pybo/question_list.html', context)
